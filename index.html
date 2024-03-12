@@ -42,44 +42,106 @@
                 <button class="tablinks" id="defaultOpen" onclick="openTab(event, 'Today')">На сегодня</button>
                 <button class="tablinks" onclick="openTab(event, 'fiveDayForecast')">На 5 дней</button>
             </div>
-
-            <!-- <div id="Today" class="tabcontent">
-                <h3>London</h3>
-                <p>London is the capital city of England.</p>
-            </div>
-
-            <div id="fiveDayForecast" class="tabcontent">
-                <h3>Paris</h3>
-                <p>Paris is the capital of France.</p>
-            </div> -->
+        </div>
     </nav>
 
     <main>
+        <!-- today panel -->
         <div class="main-block">
             <div class="currentWether">
-                <h3>Блок</h3>
+                <div id="h2">CURRENT WEATHER</div>
+                <div id="date"></div>
+                <section id="info">
+                    <div id="weather"></div>
+                    <div id="temperature"></div>
+                    <div id="day_time"></div>
+                </section>
             </div>
 
             <div class="hourly">
-                <h3>Блок</h3>
+                <div id="h3">HOURLY</div>
+                <div id="tabl">
+                    <table id="weather_table">
+                        <tr>
+                            <td><b>Today</b></td>
+                            <td id="t1">-</td>
+                            <td id="t2">-</td>
+                            <td id="t3">-</td>
+                            <td id="t4">-</td>
+                            <td id="t5">-</td>
+                            <td id="t6">-</td>
+                        </tr>
+                        <tr>
+                            <td> </td>
+                            <td id="i1">-</td>
+                            <td id="i2">-</td>
+                            <td id="i3">-</td>
+                            <td id="i4">-</td>
+                            <td id="i5">-</td>
+                            <td id="i6">-</td>
+                        </tr>
+                        <tr>
+                            <td><b>Forecast</b></td>
+                            <td id="f1">-</td>
+                            <td id="f2">-</td>
+                            <td id="f3">-</td>
+                            <td id="f4">-</td>
+                            <td id="f5">-</td>
+                            <td id="f6">-</td>
+                        </tr>
+                        <tr>
+                            <td><b>Temp (°C)</b></td>
+                            <td id="temp1">-</td>
+                            <td id="temp2">-</td>
+                            <td id="temp3">-</td>
+                            <td id="temp4">-</td>
+                            <td id="temp5">-</td>
+                            <td id="temp6">-</td>
+                        </tr>
+                        <tr>
+                            <td><b>Real Feel</b></td>
+                            <td id="r1">-</td>
+                            <td id="r2">-</td>
+                            <td id="r3">-</td>
+                            <td id="r4">-</td>
+                            <td id="r5">-</td>
+                            <td id="r6">-</td>
+                        </tr>
+                        <tr>
+                            <td><b>Wind (km/h)</b></td>
+                            <td id="w1">-</td>
+                            <td id="w2">-</td>
+                            <td id="w3">-</td>
+                            <td id="w4">-</td>
+                            <td id="w5">-</td>
+                            <td id="w6">-</td>
+                        </tr>
+                    </table>
+                </div>
             </div>
 
             <div class="nearbyPlaces">
-                <h3>Блок</h3>
+                <div id="h4">NEARBY_PLACES</div>
+                <div id="places">
+                    <div id="place1">-</div>
+                    <div id="place2">-</div>
+                    <div id="place3">-</div>
+                    <div id="place4">-</div>
+                </div>
             </div>
         </div>
 
     </main>
 
 
-    <hr>
+    <!-- <hr>
     <hr>
     <h1>Тест полигон</h1>
     <div class="vivod">
         <i class="weather-icon owf"></i>
         <div class="temperature">Вот</div>
         <div class="weather-description"></div>
-    </div>
+    </div> -->
 
 
 </body>

@@ -3,7 +3,9 @@ body {
   flex-direction: column;
   max-width: 60em;
   padding: 0 20px;
-  margin: 6em auto 19em;
+  margin: 2em auto 19em;/*6em устанавливает верхний и нижний отступы в 6 em (размер шрифта элемента).
+  auto для второго значения означает, что браузер будет автоматически распределять пространство по горизонтали, выравнивая элемент по центру.
+  19em устанавливает левый и правый отступы в 19 em.*/
   background: #fff;
   color: #333;
   /* font-family: "Roboto", "Arial", sans-serif; */
@@ -25,7 +27,6 @@ body {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  
 }
 .header-block > div > button {
   width: 177px;
@@ -96,7 +97,11 @@ body {
   border-top: none;
 }
 
-
-.vivod{
+.vivod {
   border: 1px solid red;
+}
+
+.weather-icon owf {
+  width: 200px;
+  height: 200px;
 }
