@@ -5,20 +5,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MY WEATHER</title>
+    <!-- подключаю иконки для openWeather -->
+    <link rel="stylesheet" href="owfont-regular.css"> 
     <link rel="stylesheet" href="style.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script> -->
     <script src="script.js"></script>
-    <!-- <style>
-        body {
-          background-image: url('images/back-fon2.jpg');
-          background-repeat: no-repeat;
-          background-size: cover;
-        }
-      </style> -->
-    <!-- <script>
-        // Get the element with id="defaultOpen" and click on it
-        document.getElementById("defaultOpen").onclick();
-    </script> -->
+
 </head>
 
 <body>
@@ -30,13 +22,13 @@
             </div>
             <div>
                 <label for="cityInput" style="color: white;">
+                    <!-- <input type="text" id="cityInput">
+                    <br><button onclick="getWeather(cityInput)">Показать погоду</button> -->
                     <h3>Город:</h3>
                 </label>
-                <!-- <input type="text" id="cityInput">
-                <br><button onclick="getWeather(cityInput)">Показать погоду</button> -->
-                
-                 <input class="location-input" type="text" id="city" value="New York">
-                 <button onclick="getWeather()">Показать погоду</button>
+
+                <input type="text" id="city">
+                <button id="search" value="Search" onclick="getWeatherInSpecifiedLocation()">Показать погоду</button>
             </div>
 
         </div>
@@ -78,7 +70,17 @@
         </div>
 
     </main>
-    
+
+
+    <hr>
+    <hr>
+    <h1>Тест полигон</h1>
+    <div class="vivod">
+        <i class="weather-icon owf"></i>
+        <div class="temperature">Вот</div>
+        <div class="weather-description"></div>
+    </div>
+
 
 </body>
 
