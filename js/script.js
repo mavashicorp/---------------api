@@ -139,7 +139,6 @@
 //       //document.querySelector(".weather__city").textContent = data.name;
 //       console.log(data.name);
 
-
 //       // Пример кода для вывода данных в зону полигона
 //       // //data.main.temp содержит значение в Кельвинах, отнимаем от  273, чтобы получить значение в градусах Цельсия
 //       // document.querySelector(".weather__forecast").innerHTML =
@@ -265,15 +264,33 @@ function getWeatherInSpecifiedLocation() {
       // Обработка данных о погоде
       console.log(data); // Вывод полученных данных в консоль
 
-      //////////////////////////////////////////////////////////////////////////////////
-      const temperature = document.querySelector(".temperature");
-      temperature.textContent = `${data.main.temp}°C`;
-      /////////////////////////////////////////////////////////////////////////////////
-      const weatherIcon = document.querySelector(".weather-icon");
-      const weatherDescription = document.querySelector(".weather-description");
-      
-      weatherIcon.classList.add(`owf-${data.weather[0].id}`);
-      weatherDescription.textContent = data.weather[0].description;
+      const weatherDescription =
+            data.weather[0].description.charAt(0).toUpperCase() +
+            data.weather[0].description.slice(1); // Преобразуем первую букву в заглавную
+
+        const temperature = Math.round(data.main.temp); // Записываем температуру в переменную
+
+        const weatherIcon = document.createElement('img'); // Создаем элемент для иконки погоды
+        weatherIcon.src = `http://openweathermap.org/img/wn/${data.weather[0].icon}.png`; // Устанавливаем URL для иконки
+
+        const weatherElement = document.createElement('div');
+        weatherElement.textContent = `${weatherDescription}, ${temperature}°C`; // Добавляем описание погоды и температуру
+        weatherElement.style.fontSize = "18px";
+
+        const weatherContainer = document.getElementById("weather");
+
+        weatherContainer.appendChild(weatherIcon); // Добавляем иконку погоды в контейнер
+        weatherContainer.appendChild(weatherElement); // Добавляем описание погоды и температуру в контейнер
+
+      // //////////////////////////////////////////////////////////////////////////////////
+      // const temperature = document.querySelector(".temperature");
+      // temperature.textContent = `${data.main.temp}°C`;
+      // /////////////////////////////////////////////////////////////////////////////////
+      // const weatherIcon = document.querySelector(".weather-icon");
+      // const weatherDescription = document.querySelector(".weather-description");
+
+      // weatherIcon.classList.add(`owf-${data.weather[0].id}`);
+      // weatherDescription.textContent = data.weather[0].description;
     })
     .catch((error) => {
       console.error("Возникла проблема с операцией получения:", error);
