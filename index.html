@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MY WEATHER</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="script.js"></script>
+    <!-- <style>
+        body {
+          background-image: url('images/back-fon2.jpg');
+          background-repeat: no-repeat;
+          background-size: cover;
+        }
+      </style> -->
+    <!-- <script>
+        // Get the element with id="defaultOpen" and click on it
+        document.getElementById("defaultOpen").onclick();
+    </script> -->
+</head>
+
+<body>
+
+    <header>
+        <div class="header-block">
+            <div>
+                <h1 style="color: rgb(0, 136, 255);">П о г о д а</h1>
+            </div>
+            <div>
+                <label for="cityInput" style="color: white;">
+                    <h3>Город:</h3>
+                </label>
+                <!-- <input type="text" id="cityInput">
+                <br><button onclick="getWeather(cityInput)">Показать погоду</button> -->
+                
+                 <input class="location-input" type="text" id="city" value="New York">
+                 <button onclick="getWeather()">Показать погоду</button>
+            </div>
+
+        </div>
+    </header>
+
+    <nav>
+        <div class="nav-block">
+            <!-- <button class="Today">Сегодня</button>
+            <button class="fiveDayForecast">На 5 дней</button> -->
+            <div class="tab">
+                <button class="tablinks" id="defaultOpen" onclick="openTab(event, 'Today')">На сегодня</button>
+                <button class="tablinks" onclick="openTab(event, 'fiveDayForecast')">На 5 дней</button>
+            </div>
+
+            <!-- <div id="Today" class="tabcontent">
+                <h3>London</h3>
+                <p>London is the capital city of England.</p>
+            </div>
+
+            <div id="fiveDayForecast" class="tabcontent">
+                <h3>Paris</h3>
+                <p>Paris is the capital of France.</p>
+            </div> -->
+    </nav>
+
+    <main>
+        <div class="main-block">
+            <div class="currentWether">
+                <h3>Блок</h3>
+            </div>
+
+            <div class="hourly">
+                <h3>Блок</h3>
+            </div>
+
+            <div class="nearbyPlaces">
+                <h3>Блок</h3>
+            </div>
+        </div>
+
+    </main>
+    
+
+</body>
+
+</html>
