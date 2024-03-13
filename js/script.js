@@ -251,7 +251,7 @@ function getWeatherInSpecifiedLocation() {
   const location = cityName; // Переменная для формирования запроса
   const apiKey = `34747752906cc3846e5748a60c5d8956`; // Ключ к API OpenWeatherMap
 
-  const apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${location}&appid=${apiKey}&units=metric`;
+  const apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${location}&appid=${apiKey}&units=metric&lang=ru`;
 
   fetch(apiUrl) // Выполняем fetch запрос
     .then((response) => {
