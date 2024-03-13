@@ -243,15 +243,36 @@
 //     getWeather();
 //     setInterval(getWeather, 900000);
 //   });
+//для расчета даты
+function getDateFromTimestamp(timestamp) {
+  // Создаем объект Date из временной метки (в миллисекундах)
+  var date = new Date(timestamp * 1000);
+  // Форматируем дату и время
+  var options = {
+    weekday: "long",
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+    hour: "numeric",
+    minute: "numeric",
+    second: "numeric",
+  };
+  return date.toLocaleDateString("ru-RU", options);
+}
 
 //https://learn.javascript.ru/fetch
 
+
+
 function getWeatherInSpecifiedLocation() {
+ 
   const cityName = document.getElementById("city").value; // Получаем значение из инпута города
   const location = cityName; // Переменная для формирования запроса
+  
   const apiKey = `34747752906cc3846e5748a60c5d8956`; // Ключ к API OpenWeatherMap
 
   const apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${location}&appid=${apiKey}&units=metric&lang=ru`;
+
 
   fetch(apiUrl) // Выполняем fetch запрос
     .then((response) => {
@@ -264,33 +285,41 @@ function getWeatherInSpecifiedLocation() {
       // Обработка данных о погоде
       console.log(data); // Вывод полученных данных в консоль
 
+     
+///////////////////////////
+// document.getElementById("CityName").innerText = cityName;
+      ///////////////////////////////////////////////////////////////////////
+    
+      const weatherIconDiv = document.getElementById("weatherIcon");
+      weatherIconDiv.style.backgroundImage = `url(http://openweathermap.org/img/wn/${data.weather[0].icon}.png)`;
+      weatherIconDiv.style.backgroundSize = "cover"; // Растягиваем изображение на всю область div
+      weatherIconDiv.style.width = "100px"; // Устанавливаем нужную ширину
+      weatherIconDiv.style.height = "100px"; // Устанавливаем нужную высоту
+
+      /////////////////////////////////////////////////////////
+
+      // Извлекаем дату из ответа API
+      const date = getDateFromTimestamp(data.dt);
+      // Выводим дату на веб-страницу
+      document.getElementById("date").innerText = `${date}`;
+
+      /////////////////////////////////////////////////////////
+
       const weatherDescription =
-            data.weather[0].description.charAt(0).toUpperCase() +
-            data.weather[0].description.slice(1); // Преобразуем первую букву в заглавную
+      data.weather[0].description.charAt(0).toUpperCase() +
+      data.weather[0].description.slice(1); // Преобразуем первую букву в заглавную
+      
+      const temperature = Math.round(data.main.temp); // Записываем температуру в переменную
+      document.getElementById("weather").innerText = `${weatherDescription}`; // Добавляем описание погоды и температуру
+      // weatherElement.style.fontSize = "25px";
 
-        const temperature = Math.round(data.main.temp); // Записываем температуру в переменную
+      document.getElementById("temperature").innerText = `${temperature}°C`; // Добавляем  температуру
+      weatherElement.style.fontSize = "25px";
 
-        const weatherIcon = document.createElement('img'); // Создаем элемент для иконки погоды
-        weatherIcon.src = `http://openweathermap.org/img/wn/${data.weather[0].icon}.png`; // Устанавливаем URL для иконки
+      // const weatherContainer = document.getElementById("weather");
 
-        const weatherElement = document.createElement('div');
-        weatherElement.textContent = `${weatherDescription}, ${temperature}°C`; // Добавляем описание погоды и температуру
-        weatherElement.style.fontSize = "18px";
-
-        const weatherContainer = document.getElementById("weather");
-
-        weatherContainer.appendChild(weatherIcon); // Добавляем иконку погоды в контейнер
-        weatherContainer.appendChild(weatherElement); // Добавляем описание погоды и температуру в контейнер
-
-      // //////////////////////////////////////////////////////////////////////////////////
-      // const temperature = document.querySelector(".temperature");
-      // temperature.textContent = `${data.main.temp}°C`;
-      // /////////////////////////////////////////////////////////////////////////////////
-      // const weatherIcon = document.querySelector(".weather-icon");
-      // const weatherDescription = document.querySelector(".weather-description");
-
-      // weatherIcon.classList.add(`owf-${data.weather[0].id}`);
-      // weatherDescription.textContent = data.weather[0].description;
+      // weatherContainer.appendChild(weatherIcon); // Добавляем иконку погоды в контейнер
+      // // weatherContainer.appendChild(weatherElement); // Добавляем описание погоды и температуру в контейнер
     })
     .catch((error) => {
       console.error("Возникла проблема с операцией получения:", error);

@@ -27,6 +27,10 @@ body {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  background-color: rgb(196, 215, 215);
+  border-radius: 10px;
+  padding-left: 30px;
+  padding-right: 30px;
 }
 .header-block > div > button {
   width: 177px;
@@ -36,6 +40,7 @@ body {
 .nav-block {
   /* border: 3px solid red; */
   margin-top: 15px;
+  margin-bottom: 15px;
   padding-left: 15px;
   display: flex;
   flex-direction: row;
@@ -43,17 +48,21 @@ body {
   border-radius: 10px;
 }
 
+.input-city{
+  margin-bottom: 10px;
+}
+
 .main-block {
   /* border: 3px solid red; */
   display: flex;
   flex-direction: column;
-  padding-block: 10px;
+  padding: 10px;
   background-color: rgb(196, 215, 215);
   border-radius: 10px;
 }
 
 .main-block > div {
-  margin: 15px;
+  margin: 10px;
   /* border: 3px solid red; */
   background-color: white;
   border-radius: 10px;
@@ -89,13 +98,75 @@ body {
   background-color: red;
 }
 
-/* Style the tab content */
-.tabcontent {
-  display: none;
-  padding: 6px 12px;
-  border: 1px solid #ccc;
-  border-top: none;
+
+.today {
+  text-align: center; /* Центрируем блоки по горизонтали */
 }
+
+
+.currentWeather {
+  /* display: inline-block; Располагаем блоки горизонтально */
+  margin: 10px; /* Добавляем немного отступа между блоками */
+
+}
+
+
+
+
+
+
+
+.currentWether {
+  display: flex;
+  flex-direction: row;
+  border: 1px solid red;
+  justify-content:center;
+}
+
+#info {
+  display: flex;
+  flex-direction: row;
+
+
+
+
+
+
+
+ 
+  
+
+
+
+  align-items: center;
+
+}
+
+#info > div {
+  display: flex; /* Для выравнивания по вертикали */
+  flex-direction: column; /* Выравниваем элементы в столбец */
+  align-items: center; /* Выравниваем по центру по вертикали */
+  margin-right: 30px; /* Добавляем немного отступа между элементами */
+  border: 1px solid red;
+  
+  
+}
+
+
+
+
+#info >.date{
+  height: 100px;
+}
+
+
+
+
+
+
+
+
+
 
 .vivod {
   border: 1px solid red;
