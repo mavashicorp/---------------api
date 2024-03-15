@@ -3,7 +3,7 @@ body {
   flex-direction: column;
   max-width: 60em;
   padding: 0 20px;
-  margin: 2em auto 19em;/*6em устанавливает верхний и нижний отступы в 6 em (размер шрифта элемента).
+  margin: 2em auto 19em; /*6em устанавливает верхний и нижний отступы в 6 em (размер шрифта элемента).
   auto для второго значения означает, что браузер будет автоматически распределять пространство по горизонтали, выравнивая элемент по центру.
   19em устанавливает левый и правый отступы в 19 em.*/
   background: #fff;
@@ -14,9 +14,10 @@ body {
   font-size-adjust: 0.45;
   position: relative;
   /* box-shadow: 0 0.3em 1em #000; */
+  opacity: 0.9;
 }
 body {
-  /* background-image: url("/img/back-fon1.jpg"); */
+  background-image: url("/img/more.jpg");
   background-repeat: no-repeat;
   background-size: cover;
 }
@@ -31,6 +32,7 @@ body {
   border-radius: 10px;
   padding-left: 30px;
   padding-right: 30px;
+  /* opacity: 0.5; */
 }
 .header-block > div > button {
   width: 177px;
@@ -46,9 +48,10 @@ body {
   flex-direction: row;
   background-color: #767575;
   border-radius: 10px;
+  opacity: 0.5;
 }
 
-.input-city{
+.input-city {
   margin-bottom: 10px;
 }
 
@@ -98,48 +101,22 @@ body {
   background-color: red;
 }
 
-
 .today {
   text-align: center; /* Центрируем блоки по горизонтали */
 }
 
-
-.currentWeather {
-  /* display: inline-block; Располагаем блоки горизонтально */
-  margin: 10px; /* Добавляем немного отступа между блоками */
-
-}
-
-
-
-
-
-
-
 .currentWether {
   display: flex;
   flex-direction: row;
-  border: 1px solid red;
-  justify-content:center;
+  /* border: 1px solid red; */
+  justify-content: center;
+  margin: 10px; /* Добавляем немного отступа между блоками */
 }
 
 #info {
   display: flex;
   flex-direction: row;
-
-
-
-
-
-
-
- 
-  
-
-
-
   align-items: center;
-
 }
 
 #info > div {
@@ -147,32 +124,74 @@ body {
   flex-direction: column; /* Выравниваем элементы в столбец */
   align-items: center; /* Выравниваем по центру по вертикали */
   margin-right: 30px; /* Добавляем немного отступа между элементами */
-  border: 1px solid red;
-  
-  
+  /* border: 1px solid red; */
 }
 
-
-
-
-#info >.date{
+#info > .date {
   height: 100px;
 }
 
-
-
-
-
-
-
-
-
-
 .vivod {
-  border: 1px solid red;
+  /* border: 1px solid red; */
 }
 
 .weather-icon owf {
   width: 200px;
   height: 200px;
+}
+
+.Expected {
+  word-wrap: break-word;
+}
+
+/*новый стиль для таблицы  */
+#tabl {
+  width: 100%;
+  overflow-x: auto; /* Добавляет горизонтальную прокрутку при необходимости */
+}
+
+#weather_table {
+  width: 100%;
+  border-collapse: collapse; /* Объединяет границы ячеек */
+}
+
+#weather_table td {
+  padding: 10px;
+  /* border: 1px solid #dddddd; */
+  text-align: center;
+}
+
+#weather_table td:first-child {
+  text-align: left; /* Выравнивание текста в первом столбце влево */
+}
+
+#weather_table tr:first-child {
+  font-weight: bold; /* Жирный текст для первой строки (заголовки) */
+}
+
+#weather_table tr:nth-child(odd) {
+  background-color: #f2f2f2; /* Цвет фона для четных строк */
+}  
+
+
+/* новые стиль для ближайших мест */
+.nearbyPlaces {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#places {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+   gap: 10px; 
+  /*Расстояние между элементами */
+}
+
+#places > div {
+  width: auto; /* Ширина элементов в 25% ширины родительского контейнера с учетом расстояния между ними */
+  height: 100px; /* Пример высоты элементов */
+  /* background-color: #ccc;
+  border: 1px solid #999; */
 }

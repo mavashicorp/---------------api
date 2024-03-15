@@ -1,71 +1,3 @@
-// Необхідно створити односторінковий сайт із прогнозом погоди.
-// Для отримання прогнозу використовуйте https://openweathermap.
-// org/. Зареєструйтеся та отримайте ключ.
-// На сторінці має бути 2 вкладки:
-// ■ Today – прогноз погоди на сьогодні;
-// ■ 5-day forecast – прогноз погоди на наступні 5 днів.
-// Під час завантаження сторінки відображається вкладка Today.
-// Поточне місто визначається за координатами користувача, а якщо
-// браузер не підтримує геолокацію, відображається місто, в якому
-// ви живете. Для вибору іншого міста користувач може ввести назву
-// в текстове поле для пошуку.
-// На вкладці Today відображається 3 блоки.
-// 1. Короткі відомості про поточну погоду:
-// • дата;
-// • іконка;
-// • опис прогнозу;
-// • температура;
-// • як відчувається температура;
-// • світанок;
-// • захід сонця;
-// • тривалість дня.
-// 2. Погодинний прогноз на залишок дня:
-// • час;
-// • іконка;
-// • опис прогнозу;
-// • температура;
-// • як відчувається температура;
-// • швидкість та напрям вітру.
-
-// 3. Найближчі міста та їх прогноз:
-// • назва;
-// • іконка;
-// • температура.
-// У текстовому полі для пошуку завжди має позначатися назва
-// міста, за яким відображається прогноз погоди. Навіть у тому ви-
-// падку, якщо місто визначилося за геопозицією.
-
-// Якщо користувач ввів неіснуюче місто або API не може повер-
-// нути вам інформацію про введене місто, то інформуємо про це за
-// допомогою такої сторінки:
-
-// На вкладці 5-day forecast відображається 2 блоки.
-// 1. Короткий прогноз на кожен з п’яти днів:
-// • день тижня;
-// • дата;
-// • іконка;
-// • температура;
-// • опис прогнозу.
-// 2. Погодинний прогноз для обраного дня:
-// • час;
-// • іконка;
-// • опис прогнозу;
-// • температура;
-// • як відчувається температура;
-// • швидкість та напрям вітру.
-
-// При натисканні на блок короткого прогнозу одного з п’яти днів
-// необхідно його візуально виділити і нижче відобразити прогноз
-// погоди на цей день.
-// При відкритті цієї вкладки за замовчуванням, обраним має
-// бути поточний день.
-
-// Звертаємо вашу увагу на те, що сайт односторінковий. А це
-// означає, що за будь-яких кліків, при пошуку прогнозу для іншого
-// міста або при переході по вкладках, сторінка в браузері не (!) по-
-// винна оновлюватися. Вам потрібно змінювати структуру сторінки
-// за допомогою JavaScript.
-
 // $(document).ready(function() {
 //     $.get("http:api.openweathermap.org/data/2.5/weather",
 //     {
@@ -243,6 +175,7 @@
 //     getWeather();
 //     setInterval(getWeather, 900000);
 //   });
+
 //для расчета даты
 function getDateFromTimestamp(timestamp) {
   // Создаем объект Date из временной метки (в миллисекундах)
@@ -262,17 +195,13 @@ function getDateFromTimestamp(timestamp) {
 
 //https://learn.javascript.ru/fetch
 
-
-
-function getWeatherInSpecifiedLocation() {
- 
+function getTheWeatherOneDay() {
   const cityName = document.getElementById("city").value; // Получаем значение из инпута города
   const location = cityName; // Переменная для формирования запроса
-  
+
   const apiKey = `34747752906cc3846e5748a60c5d8956`; // Ключ к API OpenWeatherMap
 
   const apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${location}&appid=${apiKey}&units=metric&lang=ru`;
-
 
   fetch(apiUrl) // Выполняем fetch запрос
     .then((response) => {
@@ -285,43 +214,147 @@ function getWeatherInSpecifiedLocation() {
       // Обработка данных о погоде
       console.log(data); // Вывод полученных данных в консоль
 
-     
-///////////////////////////
-// document.getElementById("CityName").innerText = cityName;
-      ///////////////////////////////////////////////////////////////////////
-    
+      ///////////////////////////
+      // document.getElementById("CityName").innerText = cityName;
+      //////////////////////////////////////////////////////////////////////////////////////////
+
       const weatherIconDiv = document.getElementById("weatherIcon");
       weatherIconDiv.style.backgroundImage = `url(http://openweathermap.org/img/wn/${data.weather[0].icon}.png)`;
       weatherIconDiv.style.backgroundSize = "cover"; // Растягиваем изображение на всю область div
       weatherIconDiv.style.width = "100px"; // Устанавливаем нужную ширину
       weatherIconDiv.style.height = "100px"; // Устанавливаем нужную высоту
 
-      /////////////////////////////////////////////////////////
+      //////////////////////////////////////////////////////////////////////////////////////////
 
       // Извлекаем дату из ответа API
       const date = getDateFromTimestamp(data.dt);
       // Выводим дату на веб-страницу
       document.getElementById("date").innerText = `${date}`;
 
-      /////////////////////////////////////////////////////////
+      //////////////////////////////////////////////////////////////////////////////////////////
 
       const weatherDescription =
-      data.weather[0].description.charAt(0).toUpperCase() +
-      data.weather[0].description.slice(1); // Преобразуем первую букву в заглавную
-      
+        data.weather[0].description.charAt(0).toUpperCase() +
+        data.weather[0].description.slice(1); // Преобразуем первую букву в заглавную
+
       const temperature = Math.round(data.main.temp); // Записываем температуру в переменную
+
       document.getElementById("weather").innerText = `${weatherDescription}`; // Добавляем описание погоды и температуру
       // weatherElement.style.fontSize = "25px";
 
       document.getElementById("temperature").innerText = `${temperature}°C`; // Добавляем  температуру
-      weatherElement.style.fontSize = "25px";
+      // weatherElement.style.fontSize = "25px";
 
-      // const weatherContainer = document.getElementById("weather");
+      //////////////////////////////////////////////////////////////////////////////////////////
 
-      // weatherContainer.appendChild(weatherIcon); // Добавляем иконку погоды в контейнер
-      // // weatherContainer.appendChild(weatherElement); // Добавляем описание погоды и температуру в контейнер
+      // Восход - закат
+      const sunrise = getDateFromTimestamp(data.sys.sunrise);
+      const sunset = getDateFromTimestamp(data.sys.sunset);
+
+      // Предполагая, что sunrise и sunset имеют формат "День недели, День Месяц Год в Часы:Минуты"
+      // Первым делом нужно разделить строку по пробелам
+      var sunriseParts = sunrise.split(" ");
+      var sunsetParts = sunset.split(" ");
+
+      // Получаем только время (часы и минуты)
+      var sunriseTime = sunriseParts[sunriseParts.length - 1].split(":");
+      var sunsetTime = sunsetParts[sunsetParts.length - 1].split(":");
+
+      // Извлекаем часы и минуты
+      var sunriseHours = sunriseTime[0];
+      var sunriseMinutes = sunriseTime[1];
+
+      var sunsetHours = sunsetTime[0];
+      var sunsetMinutes = sunsetTime[1];
+
+      // Теперь можно использовать полученные часы и минуты для вывода
+      document.getElementById(
+        "sunriseSunset"
+      ).innerText = `Восход: ${sunriseHours}:${sunriseMinutes} \nЗакат: ${sunsetHours}:${sunsetMinutes}`;
+
+      getTheWeatherInSpecifiedLocationForFiveDays();
+      ////////////////////////////////////////////////////////////////////////////////////////////
     })
     .catch((error) => {
-      console.error("Возникла проблема с операцией получения:", error);
+      console.error("Ошибка получения данных о погоде:", error);
     });
+}
+
+function getTheWeatherInSpecifiedLocationForFiveDays() {
+  const cityName = document.getElementById("city").value; // Получаем значение из инпута города
+  const location = cityName; // Переменная для формирования запроса
+
+  const apiKey = `34747752906cc3846e5748a60c5d8956`; // Ключ к API OpenWeatherMap
+
+  fetch(
+    `https://api.openweathermap.org/data/2.5/forecast?q=${location}&appid=${apiKey}&units=metric&lang=ru`
+  )
+  .then(response => response.json())
+  .then(data => {
+      const forecasts = data.list.slice(0, 8); // Берем первые 8 прогнозов (на 3 часа вперед)
+      forecasts.forEach((forecast, index) => {
+          const date = new Date(forecast.dt * 1000);
+          const temperature = forecast.main.temp;
+          const feelsLike = forecast.main.feels_like;
+          const icon = forecast.weather[0].icon;
+          const windSpeed = forecast.wind.speed;
+
+          document.getElementById(`t${index + 1}`).textContent = date.toLocaleTimeString();
+          document.getElementById(`i${index + 1}`).innerHTML = `<img src="http://openweathermap.org/img/wn/${icon}.png" alt="Weather Icon">`;
+          document.getElementById(`f${index + 1}`).textContent = forecast.weather[0].description;
+          document.getElementById(`temp${index + 1}`).textContent = temperature;
+          document.getElementById(`r${index + 1}`).textContent = feelsLike;
+          document.getElementById(`w${index + 1}`).textContent = windSpeed;
+
+          nextFourPlaces();
+      });
+  })
+  .catch(error => console.error('Ошибка получения данных о погоде:', error));
+}
+
+
+function nextFourPlaces() {
+  const cityName = document.getElementById("city").value; // Получаем значение из инпута города
+  const location = cityName; 
+  const apiKey = '34747752906cc3846e5748a60c5d8956'; // Ключ к API OpenWeatherMap
+
+  // Запрос к API для получения ближайших мест
+  fetch(`https://api.openweathermap.org/data/2.5/find?q=${location}&appid=${apiKey}`)
+      .then(response => response.json())
+      .then(data => {
+          const nearbyPlacesData = data.list.slice(0, 4); // Получаем первые 4 ближайших места
+
+          // Заполняем список ближайших мест
+          for (let i = 0; i < nearbyPlacesData.length; i++) {
+              const placeElement = document.getElementById(`place${i + 1}`);
+              if (placeElement) {
+                  placeElement.textContent = nearbyPlacesData[i].name; // Выводим название места
+
+                  // Получаем иконку погоды
+                  const weatherIcon = nearbyPlacesData[i].weather[0].icon;
+                  const iconUrl = `http://openweathermap.org/img/wn/${weatherIcon}.png`;
+
+                  // Создаем элемент для отображения иконки погоды
+                  const iconElement = document.createElement('img');
+                  iconElement.src = iconUrl;
+                  iconElement.alt = 'Weather Icon';
+
+                  // Добавляем иконку погоды в элемент списка места
+                  placeElement.appendChild(iconElement);
+
+                  // Получаем температуру
+                  const temperature = nearbyPlacesData[i].main.temp;
+                  // Преобразуем кельвины в градусы Цельсия и округляем до целого числа
+                  const celsiusTemperature = Math.round(temperature - 273.15);
+
+                  // Создаем элемент для отображения температуры
+                  const temperatureElement = document.createElement('span');
+                  temperatureElement.textContent = ` ${celsiusTemperature}°C`;
+
+                  // Добавляем температуру в элемент списка места
+                  placeElement.appendChild(temperatureElement);
+              }
+          }
+      })
+      .catch(error => console.error('Ошибка получения данных о ближайших местах:', error));
 }
