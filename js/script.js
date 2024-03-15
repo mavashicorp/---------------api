@@ -424,6 +424,28 @@ async function getTheWeatherInSpecifiedLocationForFiveDays() {
     .catch((error) => console.error("Error:", error));
 }
 
+// function displayDaysOfWeek() {
+//   const days = ['Воскресенье', 'Понедельник', 'Вторник', 'Среда', 'Четверг', 'Пятница', 'Суббота'];
+//   const today = new Date().getDay(); // Получаем текущий день недели (0 - воскресенье, 1 - понедельник, ..., 6 - суббота)
+
+//   let output = '<p>Текущий день недели: ' + days[today] + '</p>';
+//   output += '<p>Следующие дни недели:</p>';
+
+//   // Выводим следующие дни недели
+//   for (let i = 1; i < 4; i++) {
+//     const nextDayIndex = (today + i) % 7; // Берем остаток от деления, чтобы вернуться к воскресенью после субботы
+//     output += '<p>' + days[nextDayIndex] + '</p>';
+//     document.getElementById("t" + (i + 1)).textContent = output;
+//   }
+
+  
+// }
+
+
+
+
+
+
 // document.addEventListener('DOMContentLoaded', function () {
 //   // Функция для запроса геолокации
 //   function getLocation() {
