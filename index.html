@@ -21,13 +21,13 @@
             <div>
                 <h1 style="color: rgb(0, 136, 255);">П о г о д а</h1>
             </div>
-            <div class="input-city" >
+            <div class="input-city">
                 <!-- <label for="cityInput" style="color: red;">
                     <h3>Город:</h3>
                 </label> -->
 
-                <input type="text" id="city" placeholder="Введите город" >
-                <button id="search" value="Search" onclick="getTheWeatherOneDay()">Показать погоду</button>
+                <input type="text" id="city" placeholder="Введите город">
+                <button id="search" value="Search" onclick="getWeatherStart()">Показать погоду</button>
                 kamenskoe
                 <!-- верху рабочий код. установил заглушку на время -->
 
@@ -39,11 +39,11 @@
 
     <nav>
         <div class="nav-block">
-            <div class="tab">
+            <!-- <div class="tab">
                 <button id="ButtonToday" onclick="TodayEvents()">Сегодня</button>
                 <button id="ButtonFiveDay" onclick="FiveDayEvents()">На 5 дней</button>
 
-            </div>
+            </div> -->
         </div>
     </nav>
 
@@ -140,7 +140,7 @@
                 </div>
 
                 <div class="nearbyPlaces">
-                    <div id="h4">БЛИЖАЙШИЕ МЕСТА</div>
+                    <div id="h4"><h3>БЛИЖАЙШИЕ МЕСТА</h3></div>
                     <div id="places">
                         <div id="place1"></div>
                         <div id="place2"></div>
@@ -150,85 +150,83 @@
                 </div>
             </div>
 
-            <div class="fiveDay">
-                <div class="week">
-                    <div class="day1">-</div>
-                    <div class="day2">-</div>
-                    <div class="day3">-</div>
-                    <div class="day4">-</div>
-                    <div class="day5">-</div>
-                </div>
 
-                <div class="hourly">
-                    <div class="h3">Почасовой</div>
-                    <div id="tabl">
-                        <table id="weather_table2">
-                            <tr>
-                                <td><b>Сегодня</b></td>
-                                <td id="t1">-</td>
-                                <td id="t2">-</td>
-                                <td id="t3">-</td>
-                                <td id="t4">-</td>
-                                <td id="t5">-</td>
-                                <td id="t6">-</td>
-                            </tr>
-                            <tr>
-                                <td> </td>
-                                <td id="it1">-</td>
-                                <td id="it2">-</td>
-                                <td id="it3">-</td>
-                                <td id="it4">-</td>
-                                <td id="it5">-</td>
-                                <td id="it6">-</td>
-                            </tr>
-                            <tr>
-                                <td><b>Ожидается</b></td>
-                                <td id="ft1">-</td>
-                                <td id="ft2">-</td>
-                                <td id="ft3">-</td>
-                                <td id="ft4">-</td>
-                                <td id="ft5">-</td>
-                                <td id="ft6">-</td>
-                            </tr>
-                            <tr>
-                                <td><b>Темп. (°C)</b></td>
-                                <td id="tempt1">-</td>
-                                <td id="tempt2">-</td>
-                                <td id="tempt3">-</td>
-                                <td id="tempt4">-</td>
-                                <td id="tempt5">-</td>
-                                <td id="tempt6">-</td>
-                            </tr>
-                            <tr>
-                                <td><b>Ощущается</b></td>
-                                <td id="rt1">-</td>
-                                <td id="rt2">-</td>
-                                <td id="rt3">-</td>
-                                <td id="rt4">-</td>
-                                <td id="rt5">-</td>
-                                <td id="rt6">-</td>
-                            </tr>
-                            <tr>
-                                <td><b>Ветер (м/с)</b></td>
-                                <td id="wt1">-</td>
-                                <td id="wt2">-</td>
-                                <td id="wt3">-</td>
-                                <td id="wt4">-</td>
-                                <td id="wt5">-</td>
-                                <td id="wt6">-</td>
-                            </tr>
-                        </table>
-                    </div>
+            <div class="fiveDay">
+                <div id="tabl">
+                    <table id="weather_table2">
+                        <tr>
+                            <td><b>По дням</b></td>
+                            <td id="t1">-</td>
+                            <td id="t2">-</td>
+                            <td id="t3">-</td>
+                            <td id="t4">-</td>
+
+                        </tr>
+                        <tr>
+                            <td> </td>
+                            <td id="icon1">-</td>
+                            <td id="icon2">-</td>
+                            <td id="icon3">-</td>
+                            <td id="icon4">-</td>
+                        </tr>
+                        <tr>
+                            <td><b>Ожидается</b></td>
+                            <td id="ft1">-</td>
+                            <td id="ft2">-</td>
+                            <td id="ft3">-</td>
+                            <td id="ft4">-</td>
+                        </tr>
+                        <tr>
+                            <td><b>Темп. (°C)</b></td>
+                            <td id="tempt1">-</td>
+                            <td id="tempt2">-</td>
+                            <td id="tempt3">-</td>
+                            <td id="tempt4">-</td>
+                        </tr>
+                        <tr>
+                            <td><b>Ощущается</b></td>
+                            <td id="rt1">-</td>
+                            <td id="rt2">-</td>
+                            <td id="rt3">-</td>
+                            <td id="rt4">-</td>
+                        </tr>
+                        <tr>
+                            <td><b>Ветер (м/с)</b></td>
+                            <td id="wt1">-</td>
+                            <td id="wt2">-</td>
+                            <td id="wt3">-</td>
+                            <td id="wt4">-</td>
+                        </tr>
+                    </table>
                 </div>
             </div>
+
         </div>
 
+        <div id="map"></div>
     </main>
 
+
+
+
+
+
     <footer>
-        <hr>
-        <div class="test"></div>
+        
     </footer>
+
+    <!-- <script>
+        // Создаем карту Leaflet.js и добавляем ее в элемент с id "map"
+        var map = L.map('map').setView([48.5160, 34.6129], 13);
+    
+        // Добавляем слой карты (например, OpenStreetMap)
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '&copy; OpenStreetMap contributors'
+        }).addTo(map);
+        // Создаем маркер с всплывающей подсказкой
+        var marker = L.marker([48.5160, 34.6129]).addTo(map);
+        marker.bindTooltip("А я вам сейчас покажу откуда<br> на Беларусь готовили нападение", {permanent: true}).openTooltip();
+    </script> -->
     <!-- <script>
 
 

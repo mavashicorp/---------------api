@@ -148,6 +148,7 @@ body {
 #tabl {
   width: 100%;
   overflow-x: auto; /* Добавляет горизонтальную прокрутку при необходимости */
+  border-radius: 10px;
 }
 
 #weather_table {
@@ -195,3 +196,31 @@ body {
   /* background-color: #ccc;
   border: 1px solid #999; */
 }
+
+
+
+/* стили второй таблицы */
+#weather_table2 {
+  width: 100%;
+  border-collapse: collapse; /* Объединяет границы ячеек */
+  
+}
+
+#weather_table2 td {
+  padding: 10px;
+  /* border: 1px solid #dddddd; */
+  text-align: center;
+  /* border-radius: 10px; */
+}
+
+#weather_table td:first-child {
+  text-align: left; /* Выравнивание текста в первом столбце влево */
+}
+
+#weather_table tr:first-child {
+  font-weight: bold; /* Жирный текст для первой строки (заголовки) */
+}
+
+#weather_table2 tr:nth-child(odd) {
+  background-color: #f2f2f2; /* Цвет фона для четных строк */
+}  

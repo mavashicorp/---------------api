@@ -176,6 +176,23 @@
 //     setInterval(getWeather, 900000);
 //   });
 
+// Создаем карту Leaflet.js и добавляем ее в элемент с id "map"
+// var map = L.map('map').setView([48.5160, 34.6129], 13);
+
+// // Добавляем слой карты (например, OpenStreetMap)
+// L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+//     attribution: '&copy; OpenStreetMap contributors'
+// }).addTo(map);
+// // Создаем маркер с всплывающей подсказкой
+// var marker = L.marker([48.5160, 34.6129]).addTo(map);
+// marker.bindTooltip("А я вам сейчас покажу откуда<br> на Беларусь готовили нападение", {permanent: true}).openTooltip();
+function getWeatherStart() {
+  getTheWeatherOneDay();
+  getTheWeatherInSpecifiedLocationeveryThreeHours();
+  nextFourPlaces();
+  getTheWeatherInSpecifiedLocationForFiveDays();
+}
+
 //для расчета даты
 function getDateFromTimestamp(timestamp) {
   // Создаем объект Date из временной метки (в миллисекундах)
@@ -272,7 +289,7 @@ function getTheWeatherOneDay() {
         "sunriseSunset"
       ).innerText = `Восход: ${sunriseHours}:${sunriseMinutes} \nЗакат: ${sunsetHours}:${sunsetMinutes}`;
 
-      getTheWeatherInSpecifiedLocationForFiveDays();
+      // getTheWeatherInSpecifiedLocationeveryThreeHours();
       ////////////////////////////////////////////////////////////////////////////////////////////
     })
     .catch((error) => {
@@ -280,7 +297,7 @@ function getTheWeatherOneDay() {
     });
 }
 
-function getTheWeatherInSpecifiedLocationForFiveDays() {
+function getTheWeatherInSpecifiedLocationeveryThreeHours() {
   const cityName = document.getElementById("city").value; // Получаем значение из инпута города
   const location = cityName; // Переменная для формирования запроса
 
@@ -289,72 +306,130 @@ function getTheWeatherInSpecifiedLocationForFiveDays() {
   fetch(
     `https://api.openweathermap.org/data/2.5/forecast?q=${location}&appid=${apiKey}&units=metric&lang=ru`
   )
-  .then(response => response.json())
-  .then(data => {
+    .then((response) => response.json())
+    .then((data) => {
       const forecasts = data.list.slice(0, 8); // Берем первые 8 прогнозов (на 3 часа вперед)
       forecasts.forEach((forecast, index) => {
-          const date = new Date(forecast.dt * 1000);
-          const temperature = forecast.main.temp;
-          const feelsLike = forecast.main.feels_like;
-          const icon = forecast.weather[0].icon;
-          const windSpeed = forecast.wind.speed;
+        const date = new Date(forecast.dt * 1000);
+        const temperature = forecast.main.temp;
+        const feelsLike = forecast.main.feels_like;
+        const icon = forecast.weather[0].icon;
+        const windSpeed = forecast.wind.speed;
 
-          document.getElementById(`t${index + 1}`).textContent = date.toLocaleTimeString();
-          document.getElementById(`i${index + 1}`).innerHTML = `<img src="http://openweathermap.org/img/wn/${icon}.png" alt="Weather Icon">`;
-          document.getElementById(`f${index + 1}`).textContent = forecast.weather[0].description;
-          document.getElementById(`temp${index + 1}`).textContent = temperature;
-          document.getElementById(`r${index + 1}`).textContent = feelsLike;
-          document.getElementById(`w${index + 1}`).textContent = windSpeed;
+        document.getElementById(`t${index + 1}`).textContent =
+          date.toLocaleTimeString();
+        document.getElementById(
+          `i${index + 1}`
+        ).innerHTML = `<img src="http://openweathermap.org/img/wn/${icon}.png" alt="Weather Icon">`;
+        document.getElementById(`f${index + 1}`).textContent =
+          forecast.weather[0].description;
+        document.getElementById(`temp${index + 1}`).textContent = temperature;
+        document.getElementById(`r${index + 1}`).textContent = feelsLike;
+        document.getElementById(`w${index + 1}`).textContent = windSpeed;
 
-          nextFourPlaces();
+        // nextFourPlaces();
       });
-  })
-  .catch(error => console.error('Ошибка получения данных о погоде:', error));
+    })
+    .catch((error) =>
+      console.error("Ошибка получения данных о погоде:", error)
+    );
 }
-
 
 function nextFourPlaces() {
   const cityName = document.getElementById("city").value; // Получаем значение из инпута города
-  const location = cityName; 
-  const apiKey = '34747752906cc3846e5748a60c5d8956'; // Ключ к API OpenWeatherMap
+  const location = cityName;
+  const apiKey = "34747752906cc3846e5748a60c5d8956"; // Ключ к API OpenWeatherMap
 
   // Запрос к API для получения ближайших мест
-  fetch(`https://api.openweathermap.org/data/2.5/find?q=${location}&appid=${apiKey}`)
-      .then(response => response.json())
-      .then(data => {
-          const nearbyPlacesData = data.list.slice(0, 4); // Получаем первые 4 ближайших места
+  fetch(
+    `https://api.openweathermap.org/data/2.5/find?q=${location}&appid=${apiKey}`
+  )
+    .then((response) => response.json())
+    .then((data) => {
+      const nearbyPlacesData = data.list.slice(0, 4); // Получаем первые 4 ближайших места
 
-          // Заполняем список ближайших мест
-          for (let i = 0; i < nearbyPlacesData.length; i++) {
-              const placeElement = document.getElementById(`place${i + 1}`);
-              if (placeElement) {
-                  placeElement.textContent = nearbyPlacesData[i].name; // Выводим название места
+      // Заполняем список ближайших мест
+      for (let i = 0; i < nearbyPlacesData.length; i++) {
+        const placeElement = document.getElementById(`place${i + 1}`);
+        if (placeElement) {
+          placeElement.textContent = nearbyPlacesData[i].name; // Выводим название места
 
-                  // Получаем иконку погоды
-                  const weatherIcon = nearbyPlacesData[i].weather[0].icon;
-                  const iconUrl = `http://openweathermap.org/img/wn/${weatherIcon}.png`;
+          // Получаем иконку погоды
+          const weatherIcon = nearbyPlacesData[i].weather[0].icon;
+          const iconUrl = `http://openweathermap.org/img/wn/${weatherIcon}.png`;
 
-                  // Создаем элемент для отображения иконки погоды
-                  const iconElement = document.createElement('img');
-                  iconElement.src = iconUrl;
-                  iconElement.alt = 'Weather Icon';
+          // Создаем элемент для отображения иконки погоды
+          const iconElement = document.createElement("img");
+          iconElement.src = iconUrl;
+          iconElement.alt = "Weather Icon";
 
-                  // Добавляем иконку погоды в элемент списка места
-                  placeElement.appendChild(iconElement);
+          // Добавляем иконку погоды в элемент списка места
+          placeElement.appendChild(iconElement);
 
-                  // Получаем температуру
-                  const temperature = nearbyPlacesData[i].main.temp;
-                  // Преобразуем кельвины в градусы Цельсия и округляем до целого числа
-                  const celsiusTemperature = Math.round(temperature - 273.15);
+          // Получаем температуру
+          const temperature = nearbyPlacesData[i].main.temp;
+          // Преобразуем кельвины в градусы Цельсия и округляем до целого числа
+          const celsiusTemperature = Math.round(temperature - 273.15);
 
-                  // Создаем элемент для отображения температуры
-                  const temperatureElement = document.createElement('span');
-                  temperatureElement.textContent = ` ${celsiusTemperature}°C`;
+          // Создаем элемент для отображения температуры
+          const temperatureElement = document.createElement("span");
+          temperatureElement.textContent = ` ${celsiusTemperature}°C`;
 
-                  // Добавляем температуру в элемент списка места
-                  placeElement.appendChild(temperatureElement);
-              }
-          }
-      })
-      .catch(error => console.error('Ошибка получения данных о ближайших местах:', error));
+          // Добавляем температуру в элемент списка места
+          placeElement.appendChild(temperatureElement);
+        }
+      }
+    })
+    .catch((error) =>
+      console.error("Ошибка получения данных о ближайших местах:", error)
+    );
+  // getTheWeatherInSpecifiedLocationForFiveDays();
 }
+
+async function getTheWeatherInSpecifiedLocationForFiveDays() {
+  const cityName = document.getElementById("city").value; // Получаем значение из инпута города
+  const location = cityName;
+  const apiKey = "34747752906cc3846e5748a60c5d8956"; // Ключ к API OpenWeatherMap
+
+  const apiUrl = `https://api.openweathermap.org/data/2.5/forecast?q=${location}&cnt=5&appid=${apiKey}&units=metric&lang=ru`;
+
+  fetch(apiUrl)
+    .then((response) => response.json())
+    .then((data) => {
+      // Обновление данных на странице
+      // Извлекаем дату из ответа API
+      const date = getDateFromTimestamp(data.dt);
+      // Выводим дату на веб-страницу
+      document.getElementById("date").innerText = `${date}`;
+      for (let i = 0; i < 4; i++) {
+        const timestamp = data.list[i].dt; // Время в секундах
+        const dayOfWeek = getDateFromTimestamp(timestamp); // Получаем день недели
+
+        document.getElementById("t" + (i + 1)).textContent = dayOfWeek; // День недели
+        const iconCode = data.list[i].weather[0].icon; // Иконка
+        const iconUrl = `http://openweathermap.org/img/wn/${iconCode}.png`;
+        document.getElementById(
+          "icon" + (i + 1)
+        ).innerHTML = `<img src="${iconUrl}" alt="Weather Icon">`;
+        document.getElementById("ft" + (i + 1)).textContent =
+          data.list[i].weather[0].description; // Описание погоды
+        document.getElementById("tempt" + (i + 1)).textContent =
+          data.list[i].main.temp; // Температура
+        document.getElementById("rt" + (i + 1)).textContent =
+          data.list[i].main.feels_like; // Ощущаемая температура
+        document.getElementById("wt" + (i + 1)).textContent =
+          data.list[i].wind.speed; // Скорость ветра
+      }
+    })
+    .catch((error) => console.error("Error:", error));
+}
+
+// document.addEventListener('DOMContentLoaded', function () {
+//   // Функция для запроса геолокации
+//   function getLocation() {
+//       if (navigator.geolocation) {
+//           navigator.geolocation.getCurrentPosition(showPosition);
+//       } else {
+//           console.log("Geolocation is not supported by this browser.");
+//       }
+//   }
