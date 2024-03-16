@@ -402,10 +402,10 @@ async function getTheWeatherInSpecifiedLocationForFiveDays() {
       // Выводим дату на веб-страницу
       document.getElementById("date").innerText = `${date}`;
       for (let i = 0; i < 4; i++) {
-        const timestamp = data.list[i].dt; // Время в секундах
-        const dayOfWeek = getDateFromTimestamp(timestamp); // Получаем день недели
+        // const timestamp = data.list[i].dt; // Время в секундах
+        // const dayOfWeek = getDateFromTimestamp(timestamp); // Получаем день недели
 
-        document.getElementById("t" + (i + 1)).textContent = dayOfWeek; // День недели
+        // document.getElementById("t" + (i + 1)).textContent = dayOfWeek; // День недели
         const iconCode = data.list[i].weather[0].icon; // Иконка
         const iconUrl = `http://openweathermap.org/img/wn/${iconCode}.png`;
         document.getElementById(
